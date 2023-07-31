@@ -21,7 +21,11 @@ namespace HomeApp.Pages
             InitializeComponent();
 
             // Изменяем внешний вид кнопки для Windows-версии
-            if (Device.RuntimePlatform == Device.UWP)
+            //if (Device.RuntimePlatform == Device.UWP)
+            //    loginButton.CornerRadius = 0;
+
+            // Изменяем внешний вид кнопки для Desktop-версии
+            if (Device.Idiom == TargetIdiom.Desktop)
                 loginButton.CornerRadius = 0;
         }
         /// <summary>
