@@ -12,22 +12,24 @@ namespace HomeApp.Pages
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class LoginPage : ContentPage
     {
-        // Константа для текста кнопки
-        public const string BUTTON_TEXT = "Войти";
-        // Переменная счетчика
+        public
+        const string BUTTON_TEXT = "Войти";
         public static int loginCouner = 0;
+
+        // Создаем объект, возвращающий свойства устройства
+        IDeviceDetector detector = DependencyService.Get<IDeviceDetector>();
+
         public LoginPage()
         {
             InitializeComponent();
 
-            // Изменяем внешний вид кнопки для Windows-версии
-            //if (Device.RuntimePlatform == Device.UWP)
-            //    loginButton.CornerRadius = 0;
-
-            // Изменяем внешний вид кнопки для Desktop-версии
             if (Device.Idiom == TargetIdiom.Desktop)
                 loginButton.CornerRadius = 0;
+
+            // Передаем информацию о платформе на экран
+            runningDevice.Text = detector.GetDevice();
         }
+
         /// <summary>
         /// По клику обрабатываем счётчик и выводим разные сообщения
         /// </summary>
