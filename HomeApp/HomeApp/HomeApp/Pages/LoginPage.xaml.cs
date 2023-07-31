@@ -15,8 +15,6 @@ namespace HomeApp.Pages
         public
         const string BUTTON_TEXT = "Войти";
         public static int loginCouner = 0;
-
-        // Создаем объект, возвращающий свойства устройства
         IDeviceDetector detector = DependencyService.Get<IDeviceDetector>();
 
         public LoginPage()
@@ -26,8 +24,10 @@ namespace HomeApp.Pages
             if (Device.Idiom == TargetIdiom.Desktop)
                 loginButton.CornerRadius = 0;
 
-            // Передаем информацию о платформе на экран
             runningDevice.Text = detector.GetDevice();
+
+            // Устанавливаем динамический ресурс с помощью специально метода
+            infoMessage.SetDynamicResource(Label.TextColorProperty, "errorColor");
         }
 
         /// <summary>
@@ -43,20 +43,17 @@ namespace HomeApp.Pages
             {
                 loginButton.IsEnabled = false;
 
-                var infoMessage = (Label)stackLayout.Children.Last();
+                // Обновляем динамический ресурс по необходимости
+                Resources["errorColor"] = Color.FromHex("#e70d4f");
                 infoMessage.Text = "Слишком много попыток! Попробуйте позже";
-
-                // Новый цвет для информационных сообщений
-                var warningColor = Color.FromHex("#ffa500");
-                // Добавлем в словарь.
-                Resources.Add("warningColor", warningColor);
-
-                // Используем добавленный глобальный ресурс
-                infoMessage.TextColor = (Color)Application.Current.Resources["errorColor"];
             }
             else
             {
-                loginButton.Text = $"Выполняется вход...   Попыток входа: {loginCouner}";
+                // Обновляем динамический ресурс по необходимости
+                Resources["errorColor"] = Color.FromHex("#ff8e00");
+
+                loginButton.Text = $"Выполняется вход...";
+                infoMessage.Text = $" Попыток входа: { loginCouner}";
             }
 
             loginCouner += 1;
