@@ -51,8 +51,8 @@ namespace HomeApp.Pages
                 // Добавлем в словарь.
                 Resources.Add("warningColor", warningColor);
 
-                // Используем добавленный ресурс
-                infoMessage.TextColor = (Color)Resources["warningColor"];
+                // Используем добавленный глобальный ресурс
+                infoMessage.TextColor = (Color)Application.Current.Resources["errorColor"];
             }
             else
             {
