@@ -24,7 +24,7 @@ namespace HomeApp.Pages
             if (Device.Idiom == TargetIdiom.Desktop)
                 loginButton.CornerRadius = 0;
 
-            runningDevice.Text = detector.GetDevice();
+            //runningDevice.Text = detector.GetDevice();
 
             // Устанавливаем динамический ресурс с помощью специально метода
             infoMessage.SetDynamicResource(Label.TextColorProperty, "errorColor");
